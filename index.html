@@ -3,26 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image and Audio Viewer</title>
+    <title>Birthday Celebration</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffccff, #ff99ff);
+            font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-around;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
+            justify-content: center;
+            min-height: 100vh;
         }
-        img {
+
+        h1 {
+            color: #ffffff;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px #ff66cc;
+        }
+
+        .gallery {
+            display: flex;
+            gap: 20px;
+        }
+
+        .gallery img {
             width: 300px;
             height: auto;
+            border-radius: 15px;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-        img:hover {
+
+        .gallery img:hover {
             transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
+
         .full-screen {
             position: fixed;
             top: 0;
@@ -36,74 +56,39 @@
             z-index: 1000;
             display: none;
         }
+
         .full-screen img {
             width: auto;
             height: 90%;
-        }
-        .options {
-            margin-bottom: 20px;
-        }
-        .options label {
-            margin-right: 20px;
-            font-size: 18px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
     </style>
     <script>
-        let playMusic = true;
-
-        function setPlayMusic(value) {
-            playMusic = value;
-        }
-
-        function showFullScreen(src, audioSrc) {
+        function showFullScreen(src) {
             const fullScreenDiv = document.getElementById('full-screen');
             fullScreenDiv.style.display = 'flex';
             fullScreenDiv.querySelector('img').src = src;
-
-            // Chỉ phát nhạc nếu tùy chọn "Với nhạc nền" được chọn
-            if (playMusic && audioSrc) {
-                const audioPlayer = document.getElementById('audio-player');
-                audioPlayer.src = audioSrc;
-                audioPlayer.play();
-            }
         }
 
         function closeFullScreen() {
             const fullScreenDiv = document.getElementById('full-screen');
             fullScreenDiv.style.display = 'none';
-
-            // Dừng nhạc khi đóng hình ảnh
-            const audioPlayer = document.getElementById('audio-player');
-            audioPlayer.pause();
-            audioPlayer.currentTime = 0; // Đặt lại thời gian phát về đầu
         }
     </script>
 </head>
 <body>
 
-    <div class="options">
-        <label>
-            <input type="radio" name="viewMode" value="withMusic" checked onclick="setPlayMusic(true)">
-            Với nhạc nền
-        </label>
-        <label>
-            <input type="radio" name="viewMode" value="withoutMusic" onclick="setPlayMusic(false)">
-            Chỉ xem hình
-        </label>
-    </div>
+    <h1>Happy Birthday!</h1>
 
-    <img src="image1.jpg" alt="Image 1" onclick="showFullScreen(this.src, 'audio1.mp3')">
-    <img src="image2.jpg" alt="Image 2" onclick="showFullScreen(this.src, 'audio1.mp3')">
+    <div class="gallery">
+        <img src="image1.jpg" alt="Birthday Image 1" onclick="showFullScreen(this.src)">
+        <img src="image2.jpg" alt="Birthday Image 2" onclick="showFullScreen(this.src)">
+    </div>
 
     <div id="full-screen" class="full-screen" onclick="closeFullScreen()">
         <img src="" alt="Full Screen Image">
     </div>
-
-    <!-- Phần tử audio để phát nhạc -->
-    <audio id="audio-player">
-        <source src="" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
 
 </body>
 </html>
