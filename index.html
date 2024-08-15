@@ -3,49 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image and Audio Viewer</title>
+    <title>HỘI QUÁN MEKONG - Sinh Nhật</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffccff, #ff99ff);
+            font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-around;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
         }
-        img {
+
+        h1 {
+            color: #ffffff;
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px #ff66cc;
+        }
+
+        h2 {
+            color: #fff5f5;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px #ff66cc;
+        }
+
+        .gallery {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .gallery img {
             width: 300px;
             height: auto;
+            border-radius: 15px;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 5px solid #ff99cc;
         }
-        img:hover {
+
+        .gallery img:hover {
             transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
         }
+
         .full-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             display: none;
         }
+
         .full-screen img {
             width: auto;
             height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
+
         .options {
             margin-bottom: 20px;
         }
+
         .options label {
             margin-right: 20px;
             font-size: 18px;
+            color: #ffffff;
+            background-color: #ff66cc;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .options input {
+            margin-right: 10px;
+        }
+
+        .options label:hover {
+            background-color: #ff3399;
         }
     </style>
     <script>
@@ -81,7 +131,8 @@
 </head>
 <body>
     <h1>HỘI QUÁN MEKONG</h1>
-<h2>Panel tiệc sinh nhật</h2>
+    <h2>Panel tiệc sinh nhật</h2>
+    
     <div class="options">
         <label>
             <input type="radio" name="viewMode" value="withMusic" checked onclick="setPlayMusic(true)">
@@ -93,8 +144,10 @@
         </label>
     </div>
 
-    <img src="image1.jpg" alt="Image 1" onclick="showFullScreen(this.src, 'audio1.mp3')">
-    <img src="image2.jpg" alt="Image 2" onclick="showFullScreen(this.src, 'audio1.mp3')">
+    <div class="gallery">
+        <img src="image1.jpg" alt="Image 1" onclick="showFullScreen(this.src, 'audio1.mp3')">
+        <img src="image2.jpg" alt="Image 2" onclick="showFullScreen(this.src, 'audio2.mp3')">
+    </div>
 
     <div id="full-screen" class="full-screen" onclick="closeFullScreen()">
         <img src="" alt="Full Screen Image">
