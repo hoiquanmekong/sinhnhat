@@ -40,17 +40,31 @@
             width: auto;
             height: 90%;
         }
+        .options {
+            margin-bottom: 20px;
+        }
+        .options label {
+            margin-right: 10px;
+        }
     </style>
     <script>
+        let playMusic = true;
+
+        function setPlayMusic(value) {
+            playMusic = value;
+        }
+
         function showFullScreen(src, audioSrc) {
             const fullScreenDiv = document.getElementById('full-screen');
             fullScreenDiv.style.display = 'flex';
             fullScreenDiv.querySelector('img').src = src;
 
-            // Phát đoạn nhạc
-            const audioPlayer = document.getElementById('audio-player');
-            audioPlayer.src = audioSrc;
-            audioPlayer.play();
+            // Chỉ phát nhạc nếu tùy chọn "Với nhạc nền" được chọn
+            if (playMusic && audioSrc) {
+                const audioPlayer = document.getElementById('audio-player');
+                audioPlayer.src = audioSrc;
+                audioPlayer.play();
+            }
         }
 
         function closeFullScreen() {
@@ -65,6 +79,17 @@
     </script>
 </head>
 <body>
+
+    <div class="options">
+        <label>
+            <input type="radio" name="viewMode" value="withMusic" checked onclick="setPlayMusic(true)">
+            Với nhạc nền
+        </label>
+        <label>
+            <input type="radio" name="viewMode" value="withoutMusic" onclick="setPlayMusic(false)">
+            Chỉ xem hình
+        </label>
+    </div>
 
     <img src="image1.jpg" alt="Image 1" onclick="showFullScreen(this.src, 'audio1.mp3')">
     <img src="image2.jpg" alt="Image 2" onclick="showFullScreen(this.src, 'audio1.mp3')">
