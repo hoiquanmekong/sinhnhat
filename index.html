@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Viewer</title>
+    <title>Image and Audio Viewer</title>
     <style>
         body {
             display: flex;
-            justify-content: space-around;
+            flex-direction: column;
             align-items: center;
+            justify-content: space-around;
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
@@ -41,26 +42,42 @@
         }
     </style>
     <script>
-        function showFullScreen(src) {
+        function showFullScreen(src, audioSrc) {
             const fullScreenDiv = document.getElementById('full-screen');
             fullScreenDiv.style.display = 'flex';
             fullScreenDiv.querySelector('img').src = src;
+
+            // Phát đoạn nhạc
+            const audioPlayer = document.getElementById('audio-player');
+            audioPlayer.src = audioSrc;
+            audioPlayer.play();
         }
 
         function closeFullScreen() {
             const fullScreenDiv = document.getElementById('full-screen');
             fullScreenDiv.style.display = 'none';
+
+            // Dừng nhạc khi đóng hình ảnh
+            const audioPlayer = document.getElementById('audio-player');
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0; // Đặt lại thời gian phát về đầu
         }
     </script>
 </head>
 <body>
 
-    <img src="image1.jpg" alt="Image 1" onclick="showFullScreen(this.src)">
-    <img src="image2.jpg" alt="Image 2" onclick="showFullScreen(this.src)">
+    <img src="image1.jpg" alt="Image 1" onclick="showFullScreen(this.src, 'audio1.mp3')">
+    <img src="image2.jpg" alt="Image 2" onclick="showFullScreen(this.src, 'audio2.mp3')">
 
     <div id="full-screen" class="full-screen" onclick="closeFullScreen()">
         <img src="" alt="Full Screen Image">
     </div>
+
+    <!-- Phần tử audio để phát nhạc -->
+    <audio id="audio-player">
+        <source src="" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
 
 </body>
 </html>
